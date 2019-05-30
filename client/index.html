@@ -1,0 +1,103 @@
+<html>
+<head>
+<style type="text/css">
+svg { fill: rgba(0,0,0,0); }
+.none { fill: #eee; }
+.field { fill: #ffe; }
+.mine { fill: #eef; }
+.meadow { fill: #efe; }
+.clay { fill: #fee; }
+.forest { fill: #cdc;}
+.desert { fill: #ddb;}
+.fillwhite { fill: rgba(255,255,255,0.7); }
+.transparent { fill: rgba(0,0,0,0); }
+
+.fill { stroke: rgba(0,0,0,0); }
+.line { stroke: #ccc; }
+.text { fill: #000; stroke: rgba(0,0,0,0); text-anchor: middle; dominant-baseline: central;}
+
+.glass { stroke: #cc8; stroke-width: 3; }
+.mountain { stroke: #aad; stroke-width: 5; }
+.sheep { stroke: #aaa; stroke-width: 3; fill: rgba(0,0,0,0); }
+.block { stroke: #caa; fill: #fdd; }
+.hill { stroke: #caa; stroke-width: 5; }
+.wood3 { stroke: #ada; fill: #ada; }
+.wood2 { stroke: #aca; fill: #aca; }
+.wood1 { stroke: #aba; fill: #aba; }
+.desert_zigzag { stroke: #884; stroke-width: 1; }
+
+.settlement { stroke: rgba(0,0,0,1); fill: rgba(0,0,0,0); }
+.settlement:hover { stroke: #aaa; fill: rgba(0,0,0,0); }
+
+.path { stroke: rgba(0,0,0,1); fill: rgba(0,0,0,0); }
+.path:hover { stroke: #aaa; transform: scale(1.5,1.5)}
+.test { fill: #faa !important; }
+</style>
+<script type="text/javascript" src="dest/index.js" ></script>
+</head>
+<body>
+	<svg id="svg" width="200" height="200" viewBox="0 0 630 630" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<defs>
+			<g id="path_rect">
+				<rect x="-15" y="-5" width="30" height="10" />
+			</g>
+			<g id="hex">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="line transparent"/>
+				<circle r="15" cx="60" cy="60" class="line fillwhite"/>
+			</g>
+			<g id="glass">
+				<path d="M 0,0 L -7,20 L 8,5" class="glass" />
+				<path d="M 0,-6 l 5,0 l -7,3 l 5,0 l -6,3 l 5,0" class="glass_ear" />
+				<path d="M 10,0 l 5,0 l -8,3 l 5,0 l -7,3 l 5,0" class="glass_ear" />
+			</g>
+			<g id="hex-field" class="field">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="fill"/>
+				<use xlink:href="#glass" x="60" y="20" />
+				<use xlink:href="#glass" x="90" y="70" />
+				<use xlink:href="#glass" x="30" y="60" />
+				<use xlink:href="#hex" x="0" y="0"></use>
+			</g>
+			<g id="hex-mine">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="fill mine"/>
+				<path class="mountain" d="M 20,60 L 50,30 L 55,35 L 60,25 L 100,60" />
+				<use xlink:href="#hex" x="0" y="0"></use>
+			</g>
+			<g id="hex-meadow">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="fill meadow"/>
+				<path class="sheep" d="M20,55 C10,45,28,25,30,75 C32,25,50,45,40,55"/>
+				<path class="sheep" d="M100,55 C110,45,92,25,90,75 C88,25,70,45,80,55"/>
+				<use xlink:href="#hex" x="0" y="0"></use>
+			</g>
+			<g id="hex-clay">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="fill clay"/>
+				<!--polygon class="block" points="70 30, 30 50, 30 74, 50 94, 90 74, 90 50"/-->
+				<path class="hill" d="M 10,80 Q 40,30 70,75 Q 90,40 110,80" />
+				<path class="hill" d="M 40,55 Q 65,15 90,55" />
+				<use xlink:href="#hex" x="0" y="0"></use>
+			</g>
+			<path id="wood" d="M-2,55 L-2,45 C-8,50,-16,42,-12,35 C-16,30,-14,24,-7,25 C-2,15,2,15,7,25 C14,24,16,30,12,35 C16,42,8,50,2,45 L2,55 Z" />
+			<g id="hex-forest">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="fill forest"/>
+				<use xlink:href="#wood" class="wood3" x="60" y="0" />
+				<use xlink:href="#wood" class="wood2" x="45" y="20" />
+				<use xlink:href="#wood" class="wood2" x="75" y="20" />
+				<use xlink:href="#wood" class="wood1" x="30" y="40" />
+				<use xlink:href="#wood" class="wood1" x="60" y="40" />
+				<use xlink:href="#wood" class="wood1" x="90" y="40" />
+				<use xlink:href="#hex" x="0" y="0"></use>
+			</g>
+			<path id="zigzag" class="desert_zigzag" d="M 0,0 l 5,-3 l 5,3 l 5,-3 l 5,3" />
+			<g id="hex-center">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="fill desert"/>
+				<use xlink:href="#zigzag" x="15" y="40" />
+				<use xlink:href="#zigzag" x="30" y="80" />
+				<use xlink:href="#zigzag" x="80" y="85" />
+				<use xlink:href="#zigzag" x="65" y="35" />
+				<use xlink:href="#hex" x="0" y="0"></use>
+			</g>
+		</defs>
+		<g id='main'>
+		</g>
+	</svg>
+</body>
+</html>

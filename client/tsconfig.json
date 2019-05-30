@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "outDir": "./temp",
+    "typeRoots": [
+      "node_modules/@types",
+    ],
+    "emitDecoratorMetadata": true
+  },
+  "exclude": [
+  ]
+}

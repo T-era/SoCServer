@@ -1,0 +1,312 @@
+<html>
+<head>
+<style type="text/css">
+svg { fill: rgba(0,0,0,0); }
+.none { fill: #eee; }
+.field { fill: #ffe; }
+.mine { fill: #eef; }
+.meadow { fill: #efe; }
+.clay { fill: #fee; }
+.forest { fill: #cdc;}
+.fillwhite { fill: rgba(255,255,255,0.7); }
+.transparent { fill: rgba(0,0,0,0); }
+
+.fill { stroke: rgba(0,0,0,0); }
+.line { stroke: #ccc; }
+.text { fill: #000; stroke: rgba(0,0,0,0); text-anchor: middle; dominant-baseline: central;}
+
+.glass { stroke: #ac8; stroke-width: 3; }
+.glass_ear { stroke: #ea4; stroke-width: 2; fill: rgba(0,0,0,0); }
+.mountain { stroke: #aad; stroke-width: 5; }
+.sheep { stroke: #aaa; stroke-width: 3; fill: rgba(0,0,0,0); }
+.block { stroke: #caa; fill: #fdd; }
+.hill { stroke: #caa; stroke-width: 5; }
+.wood3 { stroke: #ada; fill: #ada; }
+.wood2 { stroke: #aca; fill: #aca; }
+.wood1 { stroke: #aba; fill: #aba; }
+
+.settlement { stroke: rgba(0,0,0,1); fill: rgba(0,0,0,0); }
+.settlement:hover { stroke: #aaa; fill: rgba(0,0,0,0); }
+
+.path { stroke: rgba(0,0,0,1); fill: rgba(0,0,0,0); }
+.path:hover { stroke: #aaa; transform: scale(1.5,1.5)}
+.test { fill: #faa !important; }
+</style>
+<script type="text/javascript" src="dest/index.js" ></script>
+</head>
+<body>
+	<svg id="svg" width="200" height="200" viewBox="0 0 630 630" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<defs>
+			<g id="path_rect">
+				<rect x="-15" y="-5" width="30" height="10" />
+			</g>
+			<g id="hex-center">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="fill none"/>
+			</g>
+			<g id="hex">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="line transparent"/>
+				<circle r="15" cx="60" cy="60" class="line fillwhite"/>
+			</g>
+			<g id="glass">
+				<path d="M 0,0 L -7,20 L 8,5" class="glass" />
+				<path d="M 0,-6 l 5,0 l -7,3 l 5,0 l -6,3 l 5,0" class="glass_ear" />
+				<path d="M 10,0 l 5,0 l -8,3 l 5,0 l -7,3 l 5,0" class="glass_ear" />
+			</g>
+			<g id="hex-field" class="field">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="fill"/>
+				<use xlink:href="#glass" x="60" y="20" />
+				<use xlink:href="#glass" x="90" y="70" />
+				<use xlink:href="#glass" x="30" y="60" />
+				<use xlink:href="#hex" x="0" y="0"></use>
+			</g>
+			<g id="hex-mine">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="fill mine"/>
+				<path class="mountain" d="M 20,60 L 50,30 L 55,35 L 60,25 L 100,60" />
+				<use xlink:href="#hex" x="0" y="0"></use>
+			</g>
+			<g id="hex-meadow">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="fill meadow"/>
+				<path class="sheep" d="M20,55 C10,45,28,25,30,75 C32,25,50,45,40,55"/>
+				<path class="sheep" d="M100,55 C110,45,92,25,90,75 C88,25,70,45,80,55"/>
+				<use xlink:href="#hex" x="0" y="0"></use>
+			</g>
+			<g id="hex-clay">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="fill clay"/>
+				<!--polygon class="block" points="70 30, 30 50, 30 74, 50 94, 90 74, 90 50"/-->
+				<path class="hill" d="M 10,80 Q 40,30 70,75 Q 90,40 110,80" />
+				<path class="hill" d="M 40,55 Q 65,15 90,55" />
+				<use xlink:href="#hex" x="0" y="0"></use>
+			</g>
+			<path id="wood" d="M-2,55 L-2,45 C-8,50,-16,42,-12,35 C-16,30,-14,24,-7,25 C-2,15,2,15,7,25 C14,24,16,30,12,35 C16,42,8,50,2,45 L2,55 Z" />
+			<g id="hex-forest">
+				<polygon points="60 0, 120 30, 120 90, 60 120, 0 90, 0 30, 60 0" class="fill forest"/>
+				<use xlink:href="#wood" class="wood3" x="60" y="0" />
+				<use xlink:href="#wood" class="wood2" x="45" y="20" />
+				<use xlink:href="#wood" class="wood2" x="75" y="20" />
+				<use xlink:href="#wood" class="wood1" x="30" y="40" />
+				<use xlink:href="#wood" class="wood1" x="60" y="40" />
+				<use xlink:href="#wood" class="wood1" x="90" y="40" />
+				<use xlink:href="#hex" x="0" y="0"></use>
+			</g>
+		</defs>
+		<g>
+			<use id="h00" xlink:href="#hex-field" x="130" y="10" class="hex" />
+			<use id="h10" xlink:href="#hex-field" x="250" y="10" class="hex" />
+			<use id="h20" xlink:href="#hex-mine" x="370" y="10" class="hex" />
+			<text id="t00" x="190" y="70" class="text" />
+			<text id="t10" x="310" y="70" class="text" />
+			<text id="t20" x="430" y="70" class="text" />
+
+			<use id="h01" xlink:href="#hex-meadow" x="70" y="100" class="hex" />
+			<use id="h11" xlink:href="#hex-clay" x="190" y="100" class="hex" />
+			<use id="h21" xlink:href="#hex-forest" x="310" y="100" class="hex" />
+			<use id="h31" xlink:href="#hex" x="430" y="100" class="hex" />
+			<text id="t01" x="130" y="160" class="text" />
+			<text id="t11" x="250" y="160" class="text" />
+			<text id="t21" x="370" y="160" class="text" />
+			<text id="t31" x="490" y="160" class="text" />
+
+			<use id="h02" xlink:href="#hex" x="10" y="190" class="hex" />
+			<use id="h12" xlink:href="#hex" x="130" y="190" class="hex" />
+			<use id="h22" xlink:href="#hex-center" x="250" y="190" class="hex" />
+			<use id="h32" xlink:href="#hex" x="370" y="190" class="hex" />
+			<use id="h42" xlink:href="#hex" x="490" y="190" class="hex" />
+			<text id="t02" x="70" y="250" class="text" />
+			<text id="t12" x="190" y="250" class="text" />
+			<text id="t22" x="310" y="250" class="text" />
+			<text id="t32" x="430" y="250" class="text" />
+			<text id="t42" x="550" y="250" class="text" />
+
+			<use id="h13" xlink:href="#hex" x="70" y="280" class="hex" />
+			<use id="h23" xlink:href="#hex" x="190" y="280" class="hex" />
+			<use id="h33" xlink:href="#hex" x="310" y="280" class="hex" />
+			<use id="h43" xlink:href="#hex" x="430" y="280" class="hex" />
+			<text id="t13" x="130" y="340" class="text" />
+			<text id="t23" x="250" y="340" class="text" />
+			<text id="t33" x="370" y="340" class="text" />
+			<text id="t43" x="490" y="340" class="text" />
+
+			<use id="h24" xlink:href="#hex" x="130" y="370" class="hex" />
+			<use id="h34" xlink:href="#hex" x="250" y="370" class="hex" />
+			<use id="h44" xlink:href="#hex" x="370" y="370" class="hex" />
+			<text id="t24" x="190" y="430" class="text" />
+			<text id="t34" x="310" y="430" class="text" />
+			<text id="t44" x="430" y="430" class="text" />
+		</g>
+		<circle id="s00" cx="130" cy="40" r="10" class="settlement" />
+		<circle id="s10" cx="190" cy="10" r="10" class="settlement" />
+		<circle id="s20" cx="250" cy="40" r="10" class="settlement" />
+		<circle id="s30" cx="310" cy="10" r="10" class="settlement" />
+		<circle id="s40" cx="370" cy="40" r="10" class="settlement" />
+		<circle id="s50" cx="430" cy="10" r="10" class="settlement" />
+		<circle id="s60" cx="490" cy="40" r="10" class="settlement" />
+		<circle id="s01" cx="70" cy="130" r="10" class="settlement" />
+		<circle id="s11" cx="130" cy="100" r="10" class="settlement" />
+		<circle id="s21" cx="190" cy="130" r="10" class="settlement" />
+		<circle id="s31" cx="250" cy="100" r="10" class="settlement" />
+		<circle id="s41" cx="310" cy="130" r="10" class="settlement" />
+		<circle id="s51" cx="370" cy="100" r="10" class="settlement" />
+		<circle id="s61" cx="430" cy="130" r="10" class="settlement" />
+		<circle id="s71" cx="490" cy="100" r="10" class="settlement" />
+		<circle id="s81" cx="550" cy="130" r="10" class="settlement" />
+		<circle id="s02" cx="10" cy="220" r="10" class="settlement" />
+		<circle id="s12" cx="70" cy="190" r="10" class="settlement" />
+		<circle id="s22" cx="130" cy="220" r="10" class="settlement" />
+		<circle id="s32" cx="190" cy="190" r="10" class="settlement" />
+		<circle id="s42" cx="250" cy="220" r="10" class="settlement" />
+		<circle id="s52" cx="310" cy="190" r="10" class="settlement" />
+		<circle id="s62" cx="370" cy="220" r="10" class="settlement" />
+		<circle id="s72" cx="430" cy="190" r="10" class="settlement" />
+		<circle id="s82" cx="490" cy="220" r="10" class="settlement" />
+		<circle id="s92" cx="550" cy="190" r="10" class="settlement" />
+		<circle id="sA2" cx="610" cy="220" r="10" class="settlement" />
+		<circle id="s03" cx="10" cy="280" r="10" class="settlement" />
+		<circle id="s13" cx="70" cy="310" r="10" class="settlement" />
+		<circle id="s23" cx="130" cy="280" r="10" class="settlement" />
+		<circle id="s33" cx="190" cy="310" r="10" class="settlement" />
+		<circle id="s43" cx="250" cy="280" r="10" class="settlement" />
+		<circle id="s53" cx="310" cy="310" r="10" class="settlement" />
+		<circle id="s63" cx="370" cy="280" r="10" class="settlement" />
+		<circle id="s73" cx="430" cy="310" r="10" class="settlement" />
+		<circle id="s83" cx="490" cy="280" r="10" class="settlement" />
+		<circle id="s93" cx="550" cy="310" r="10" class="settlement" />
+		<circle id="sA3" cx="610" cy="280" r="10" class="settlement" />
+		<circle id="s14" cx="70" cy="370" r="10" class="settlement" />
+		<circle id="s24" cx="130" cy="400" r="10" class="settlement" />
+		<circle id="s34" cx="190" cy="370" r="10" class="settlement" />
+		<circle id="s44" cx="250" cy="400" r="10" class="settlement" />
+		<circle id="s54" cx="310" cy="370" r="10" class="settlement" />
+		<circle id="s64" cx="370" cy="400" r="10" class="settlement" />
+		<circle id="s74" cx="430" cy="370" r="10" class="settlement" />
+		<circle id="s84" cx="490" cy="400" r="10" class="settlement" />
+		<circle id="s94" cx="550" cy="370" r="10" class="settlement" />
+		<circle id="s24" cx="130" cy="460" r="10" class="settlement" />
+		<circle id="s34" cx="190" cy="490" r="10" class="settlement" />
+		<circle id="s44" cx="250" cy="460" r="10" class="settlement" />
+		<circle id="s54" cx="310" cy="490" r="10" class="settlement" />
+		<circle id="s64" cx="370" cy="460" r="10" class="settlement" />
+		<circle id="s74" cx="430" cy="490" r="10" class="settlement" />
+		<circle id="s84" cx="490" cy="460" r="10" class="settlement" />
+
+		<g id="r_00_10" transform="translate(160,25) rotate(-30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_10_20" transform="translate(220,25) rotate(30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_20_30" transform="translate(280,25) rotate(-30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_30_40" transform="translate(340,25) rotate(30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_40_50" transform="translate(400,25) rotate(-30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_50_60" transform="translate(460,25) rotate(30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_00_11" transform="translate(130,70) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_20_31" transform="translate(250,70) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_40_51" transform="translate(370,70) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_60_71" transform="translate(490,70) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+
+		<g id="r_01_11" transform="translate(100,115) rotate(-30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_11_21" transform="translate(160,115) rotate(30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_21_31" transform="translate(220,115) rotate(-30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_31_41" transform="translate(280,115) rotate(30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_41_51" transform="translate(340,115) rotate(-30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_51_61" transform="translate(400,115) rotate(30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_61_71" transform="translate(460,115) rotate(-30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_71_81" transform="translate(520,115) rotate(30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_01_12" transform="translate(70,160) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_21_32" transform="translate(190,160) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_41_52" transform="translate(310,160) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_61_72" transform="translate(430,160) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_81_92" transform="translate(550,160) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+
+		<g id="r_02_12" transform="translate(40,205) rotate(-30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_12_22" transform="translate(100,205) rotate(30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_22_32" transform="translate(160,205) rotate(-30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_32_42" transform="translate(220,205) rotate(30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_42_52" transform="translate(280,205) rotate(-30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_52_62" transform="translate(340,205) rotate(30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_62_72" transform="translate(400,205) rotate(-30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_72_82" transform="translate(460,205) rotate(30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_82_92" transform="translate(520,205) rotate(-30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_92_A2" transform="translate(580,205) rotate(30)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_02_03" transform="translate(10,250) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+
+
+
+		<g id="r_21_32" transform="translate(190,160) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_41_52" transform="translate(310,160) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_61_72" transform="translate(430,160) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+		<g id="r_81_92" transform="translate(550,160) rotate(90)" class="pathg">
+			<use xlink:href="#path_rect" class="path"/>
+		</g>
+	</svg>
+</body>
+</html>
